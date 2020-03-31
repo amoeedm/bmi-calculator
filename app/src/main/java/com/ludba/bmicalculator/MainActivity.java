@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                     bmiAnswer.setText(getBMIValuetoString(getHeightValue(), getWeightValue()));
                 }
                 catch (Exception e){
-                    System.out.println(e.getMessage());
+                    bmiAnswer.setText("Height and weight must be non-empty positive values.");
                 }
             }
         });
