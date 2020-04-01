@@ -16,8 +16,18 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
+    private enum BMI
+    {
+        UNDERWEIGHT,
+        NORMAL,
+        OVERWEIGHT,
+        OBESE
+    }
+
     EditText heightValue;
     EditText weightValue;
+    TextView bmiExplanation;
+    BMI typeClassification;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,57 +38,81 @@ public class MainActivity extends AppCompatActivity {
 
         heightValue = (EditText) findViewById(R.id.editTextHeight);
         weightValue = (EditText) findViewById(R.id.editTextWeight);
-        BootstrapButton computeBMI = (BootstrapButton) findViewById(R.id.bootstrapSubmitButton);
+        bmiExplanation = (TextView) findViewById(R.id.textViewExplanation);
         final TextView bmiAnswer = (TextView) findViewById(R.id.textViewAnswer);
-
+        BootstrapButton computeBMI = (BootstrapButton) findViewById(R.id.bootstrapSubmitButton);
 
         computeBMI.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-
-                setErrorMessage(heightValue, "Height");
-                setErrorMessage(weightValue, "Weight");
+                setErrorMessageIfEmptyField(heightValue, "Height");
+                setErrorMessageIfEmptyField(weightValue, "Weight");
                 closeKeyboard();
-
-                try {
-                    bmiAnswer.setText(getBMIValuetoString(getHeightValue(), getWeightValue()));
-                }
-                catch (Exception e){
-                    bmiAnswer.setText("Height and weight must be non-empty positive values.");
-                }
+                setComputationAnswer(bmiAnswer, heightValue, weightValue);
             }
         });
 
     }
 
-    protected void setErrorMessage(EditText et, String attributeName){
+    protected void setComputationAnswer(TextView bmi, EditText height, EditText weight){
+        try {
+            String bmiValueText = getBMIValuetoString(height, weight);
+            bmi.setText(bmiValueText);
+            setBMIClassification(Double.valueOf(bmiValueText));
+            bmiExplanation.setText("Your nutritional status is " +
+                    typeClassification.name().toLowerCase() + " according to the World Health Organization. " +
+                    "A normal adult with your height should weigh between " + String.valueOf(lowerValue(height)) +
+                    " kg and " + String.valueOf(upperValue((height))) + " kg.");
+        }
+        catch (Exception e){
+            bmi.setText("");
+        }
+    }
+
+    protected int lowerValue(EditText h) throws Exception{
+        double height = getValue(h);
+        return (int) Math.round(18.5*getValue(h)*getValue(h));
+    }
+
+    protected int upperValue(EditText h) throws Exception {
+        double height = getValue(h);
+        return (int) Math.round(25*height*height);
+    }
+
+    protected void setBMIClassification(double bmiValue){
+        if(bmiValue < 18.5)
+            typeClassification = BMI.UNDERWEIGHT;
+        else if(bmiValue < 25)
+            typeClassification = BMI.NORMAL;
+        else if(bmiValue < 30)
+            typeClassification = BMI.OVERWEIGHT;
+        else
+            typeClassification = BMI.OBESE;
+    }
+
+    protected void setErrorMessageIfEmptyField(EditText et, String attributeName){
         if (et.getText().toString().trim().length() < 1) {
             et.requestFocus();
             et.setError(attributeName + " is required.");
         }
     }
 
-    protected double getHeightValue() throws Exception{
-        double height = Double.parseDouble(heightValue.getText().toString());
-        if (height <= 0)
-            throw new Exception("Height must be positive.");
-        return height;
-    }
-
-    protected double getWeightValue() throws Exception{
-        double weight = Double.parseDouble(weightValue.getText().toString());
-        if (weight <= 0)
-            throw new Exception("Weight must be positive.");
-        return weight;
+    protected double getValue(EditText et) throws Exception{
+        double value = Double.parseDouble(et.getText().toString());
+        if (value <= 0)
+            throw new Exception("Value must be positive");
+        return value;
     }
 
     protected double getBMIValue(double height, double weight){
         return (double) weight/(height*height);
     }
 
-    protected String getBMIValuetoString(double height, double weight) throws Exception {
-        return Double.toString(getBMIValue(getHeightValue(), getWeightValue()));
+
+    protected String getBMIValuetoString(EditText height, EditText weight) throws Exception {
+        double roundedValue =  Math.round((getBMIValue(getValue(height), getValue(weight))) * 100.0) / 100.0;
+        return Double.toString(roundedValue);
     }
 
     protected void closeKeyboard(){

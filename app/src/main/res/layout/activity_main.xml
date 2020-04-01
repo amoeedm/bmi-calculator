@@ -9,28 +9,31 @@
 
     <EditText
         android:id="@+id/editTextHeight"
-        android:layout_width="wrap_content"
+        android:layout_width="90sp"
         android:layout_height="wrap_content"
         android:autofillHints=""
         android:ems="10"
         android:gravity="center"
         android:hint="@string/height_m_here"
         android:inputType="numberDecimal"
+        android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.163" />
+        app:layout_constraintVertical_bias="0.15" />
 
     <EditText
         android:id="@+id/editTextWeight"
-        android:layout_width="wrap_content"
+        android:layout_width="90sp"
         android:layout_height="wrap_content"
         android:autofillHints=""
         android:ems="10"
         android:gravity="center"
         android:hint="@string/weight_kg_here"
         android:inputType="numberDecimal"
+        android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,27 +42,49 @@
 
     <TextView
         android:id="@+id/textViewHeight"
-        android:layout_width="wrap_content"
+        android:layout_width="154sp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="120sp"
+        android:layout_marginEnd="300sp"
+        android:gravity="right"
         android:text="@string/height_m"
-        app:layout_constraintBottom_toTopOf="@+id/editTextHeight"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.302"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewMeter"
+        android:layout_width="100sp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="300sp"
+        android:layout_marginTop="120sp"
+        android:text="@string/m"
+        android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.945" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewWeight"
-        android:layout_width="wrap_content"
+        android:layout_width="154sp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="230sp"
+        android:layout_marginEnd="300sp"
+        android:gravity="right"
         android:text="@string/weight_kg"
-        app:layout_constraintBottom_toTopOf="@+id/editTextWeight"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.295"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewKg"
+        android:layout_width="154sp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="300sp"
+        android:layout_marginTop="230sp"
+        android:text="@string/kg"
+        android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextHeight"
-        app:layout_constraintVertical_bias="0.865" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.beardedhen.androidbootstrap.BootstrapButton
         android:id="@+id/bootstrapSubmitButton"
@@ -67,24 +92,40 @@
         android:layout_height="wrap_content"
         android:text="@string/calculate_bmi"
         app:bootstrapBrand="primary"
-        app:bootstrapSize="lg"
+        app:bootstrapSize="xl"
         app:buttonMode="regular"
         app:layout_constraintBottom_toTopOf="@+id/textViewAnswer"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextWeight"
-        app:layout_constraintVertical_bias="0.582"
+        app:layout_constraintVertical_bias="0.318"
         app:roundedCorners="true"
         app:showOutline="false" />
 
     <TextView
         android:id="@+id/textViewAnswer"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="296dp"
-        android:gravity="center"
+        android:layout_width="100sp"
+        android:layout_height="60sp"
+        android:layout_marginBottom="220sp"
+        android:gravity="top|center"
+        android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewExplanation"
+        android:layout_width="400sp"
+        android:layout_height="wrap_content"
+        android:text="@string/explanation"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAnswer" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

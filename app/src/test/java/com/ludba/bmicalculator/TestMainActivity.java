@@ -1,5 +1,7 @@
 package com.ludba.bmicalculator;
 
+import android.widget.EditText;
+
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -21,26 +23,5 @@ public class TestMainActivity {
         assertEquals(bmi, 23.4375, 0.00001);
     }
 
-    @Test
-    public void bmiValueThrowsExceptionForNegativeHeight() {
-        MainActivity m = new MainActivity();
-        try {
-            double bmi = m.getBMIValue(-1.6, 60);
-        }
-        catch (Exception e) {
-            assertThat(e.getMessage(), is("Height must be positive."));
-        }
-    }
-
-    @Test
-    public void bmiValueThrowsExceptionForNegativeWeight() {
-        MainActivity m = new MainActivity();
-        try {
-            double bmi = m.getBMIValue(1.6, -60);
-        }
-        catch (Exception e) {
-            assertThat(e.getMessage(), is("Weight must be positive."));
-        }
-    }
 
 }
