@@ -9,4 +9,4 @@ An Android application for computing Body Mass Index (BMI) using height and weig
 </p>
 
 ## Installation
-Available at Google Play Store.
+Available at <a href="https://play.google.com/store/apps/details?id=com.ludba.bmicalculator">Google Play Store</a>
